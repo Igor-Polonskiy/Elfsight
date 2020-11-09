@@ -1,0 +1,22 @@
+.user_card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4); 
+    margin: 30px;
+    background-color: rgb(249, 249, 250);
+    transition: 0.2s;
+    cursor: pointer;
+}
+.user_card h3{
+    text-align: center;
+    color: rgb(58, 57, 57);
+}
+.user_card:hover{
+    transition: 0.2s;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}

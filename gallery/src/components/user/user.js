@@ -1,11 +1,10 @@
-function User(name = 'incognito') {
+import './user.css';
 
-
-    return (
+function User(props){
+    return(
         <div className='user_card'>
-            <h3>{name}</h3>
+            <h3>{props.name}</h3>
         </div>
-    );
-
+    )
 }
 export default User;
