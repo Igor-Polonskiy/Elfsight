@@ -1,24 +1,39 @@
 import './gallery.css';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import Album from '../album/album';
 
 function Gallery(props) {
-    const [data, setData] = useState([]);
+    const [albums, setAlbums] = useState([]);
     const [isLoad, setLoad] = useState(false);
     const [userid, setUserid] = useState(props.id);
 
-    function getData() {
+    
+
+    function getAlbums() {
+        console.log(props.id)
         fetch('https://jsonplaceholder.typicode.com/albums')
             .then(res => res.json())
-            .then(res => setData(res))
+            .then(res => res.filter(item => item.userId === userid))
+            .then(res => setAlbums(res))
             .then(() => setLoad(true))
 
     }
-    useEffect(() => {
-        getData()
 
+    useEffect(() => {
+        getAlbums()
     }, []);
+
+
+
     return (
-        <div>{userid}</div>
+        <Fragment>
+            {isLoad ? albums.map((item) =>
+             <Album 
+             title={item.title}
+           
+              />)
+                : <div>not Yet</div>}
+        </Fragment>
     )
 
 }

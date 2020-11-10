@@ -13,6 +13,7 @@ function App() {
   const [data, setData] = useState([]);
   const [isLoad, setLoad] = useState(false);
   const [userid, setUserid] = useState(null);
+  const [gallery, setGallery] = useState(null);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -22,8 +23,13 @@ function App() {
   }, []);
 
   const handleclick = (id) => {
-    setUserid(id)
+    setUserid(id);
+    setGallery(<Gallery id={id} />)
   }
+  useEffect(()=>{
+   
+  }, [userid])
+  
   
 
 
@@ -37,8 +43,8 @@ function App() {
               <div>notYet</div>}
           </div>
         </Route>
-        <Route path='/' >
-          <Gallery id={userid} />
+        <Route path='/user' >
+          {gallery}
         </Route>
       </Switch>
     </Router>

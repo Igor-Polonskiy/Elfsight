@@ -1,25 +1,25 @@
 import User from '../user/user';
 import './users.css';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Users(props) {
   const [userid, setUserid] = useState(null);
 
-  const handleclick = (id) => {
+  function handleclick(id) {
     setUserid(id);
-    props.getid(userid);
+    props.getid(id);
   }
 
   useEffect(() => {
-    //props.getid(userid);
+    
     console.log(userid);
 
   }, [userid]);
 
 
   let screen = props.users.map(item =>
-    <Link  key={item.id} onClick={()=>handleclick(item.id)} to={`/#${item.name}`}>
+    <Link  key={item.id} onClick={()=>handleclick(item.id)} to={`/user#${item.name}`}>
       <User
         name={item.name}
         id={item.id}
