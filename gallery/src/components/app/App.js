@@ -1,42 +1,47 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Users from '../users/users';
-import User from '../user/user';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Gallery from '../gallery/gallery';
+
 
 
 function App() {
   const [data, setData] = useState([]);
-  const [isLoad, setLoad] = useState(false)
-  
-  function getData() {
+  const [isLoad, setLoad] = useState(false);
+  const [userid, setUserid] = useState(null);
+
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(res => setData(res))
       .then(() => setLoad(true))
-      
+  }, []);
+
+  const handleclick = (id) => {
+    setUserid(id)
   }
   
-  useEffect(() => {
-    getData()
-    
-  }, [])
-  
- 
-
-    
-
-
 
 
   return (
-    <Fragment>
-    <div className="App">
-      {isLoad ?
-        <Users users = {data}/> :
-        <div>notYet</div>}
-
-    </div>
-
-    </Fragment>
+    <Router>
+      <Switch>
+        <Route path='/' exact>
+          <div className="App">
+            {isLoad ?
+              <Users users={data} getid={handleclick} /> :
+              <div>notYet</div>}
+          </div>
+        </Route>
+        <Route path='/' >
+          <Gallery id={userid} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
