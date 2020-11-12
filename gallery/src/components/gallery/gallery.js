@@ -55,6 +55,7 @@ function Gallery(props) {
                             title={item.title}
                             photos={count.length}
                             background={count[1].thumbnailUrl}
+                            altImg={count[1].title}
                         />)
                 })
 
