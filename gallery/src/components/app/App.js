@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import Gallery from '../gallery/gallery';
+import OpenedAlbum from '../openedAlbum/openedAlbum'
 
 
 
@@ -14,6 +15,9 @@ function App() {
   const [isLoad, setLoad] = useState(false);
   const [userid, setUserid] = useState(null);
   const [gallery, setGallery] = useState(null);
+  const [photos, setPhotos] = useState([]);
+  const [shownAlbum, setShownAlbum] = useState(null);
+  const [filtrePhotos, setFiltredPhoto] = useState([]);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -22,15 +26,18 @@ function App() {
       .then(() => setLoad(true))
   }, []);
 
+  function getPhotos(photos) {
+    setPhotos(photos)
+    setFiltredPhoto(photos.filter(photo => photo.albumId === shownAlbum))
+  }
+  function getShownAlbum(albumId) {
+    setShownAlbum(albumId)
+  }
+
   const handleclick = (id) => {
     setUserid(id);
-    setGallery(<Gallery id={id} />)
+    setGallery(<Gallery id={id} getPhotos={getPhotos} getShownAlbum={getShownAlbum}/>)
   }
-  useEffect(()=>{
-   
-  }, [userid])
-  
-  
 
 
   return (
@@ -45,6 +52,9 @@ function App() {
         </Route>
         <Route path='/user' >
           {gallery}
+        </Route>
+        <Route path='/album' >
+          <OpenedAlbum photos={filtrePhotos} />
         </Route>
       </Switch>
     </Router>

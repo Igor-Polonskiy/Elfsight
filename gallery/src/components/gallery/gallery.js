@@ -2,6 +2,7 @@ import './gallery.css';
 import { Fragment, useEffect, useState } from "react";
 import Album from '../album/album';
 import OpenedAlbum from '../openedAlbum/openedAlbum'
+import { Link } from 'react-router-dom';
 
 function Gallery(props) {
     const [albums, setAlbums] = useState([]);
@@ -14,7 +15,6 @@ function Gallery(props) {
 
 
     function getData() {
-
 
         fetch('https://jsonplaceholder.typicode.com/albums')
             .then(res => res.json())
@@ -33,9 +33,17 @@ function Gallery(props) {
         getData()
     }, []);
 
+    useEffect(() => {
+        props.getPhotos(photos)
+    }, [photos]);
+    
+ 
+
+
     function handleClick(id) {
         setShownAlbum(id);
         setIsAlbumOpened(false);
+        props.getShownAlbum(id)
     }
     function handleClickBack() {
         setIsAlbumOpened(true)
@@ -49,19 +57,21 @@ function Gallery(props) {
                     let count = photos.filter(photo => photo.albumId === item.id)
 
                     return (
-                        <Album
-                            key={item.id}
-                            onClick={() => handleClick(item.id)}
-                            title={item.title}
-                            photos={count.length}
-                            background={count[1].thumbnailUrl}
-                            altImg={count[1].title}
-                        />)
+                        
+                            <Album
+                                key={item.id}
+                                onClick={() => handleClick(item.id)}
+                                title={item.title}
+                                photos={count.length}
+                                background={count[1].thumbnailUrl}
+                                altImg={count[1].title}
+                            />
+                        )
                 })
 
                     : <div>not Yet</div>) :
                 <div>
-                <OpenedAlbum photos = {photos.filter(photo => photo.albumId === shownAlbum)}/>
+                    <OpenedAlbum photos={photos.filter(photo => photo.albumId === shownAlbum)} />
                     <button onClick={handleClickBack}>назад</button>
                 </div>
             }
