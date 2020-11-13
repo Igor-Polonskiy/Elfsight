@@ -1,6 +1,10 @@
-.users{
+.users {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
 
+h1 {
+    text-align: center;
+    color: slateblue;
 }

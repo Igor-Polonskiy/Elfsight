@@ -1,38 +1,28 @@
 import User from '../user/user';
 import './users.css';
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 
 function Users(props) {
-  const [userid, setUserid] = useState(null);
 
-  function handleclick(id) {
-    setUserid(id);
-    props.getid(id);
+  function handleclick(id, name) {
+    props.getid(id,name);
+    
   }
 
-  useEffect(() => {
-    
-    console.log(userid);
-
-  }, [userid]);
-
-
-  let screen = props.users.map(item =>
-    <Link  key={item.id} onClick={()=>handleclick(item.id)} to={`/user#${item.name}`}>
-      <User
-        name={item.name}
-        id={item.id}
-      />
-    </Link>
-  );
-
   return (
-    <div className='users'>
-
-      {screen}
-
-    </div>
+    <Fragment>
+      <h1>Пользователи</h1>
+      <div className='users'>
+        {props.users.map(item =>
+          <Link key={item.id} onClick={() => handleclick(item.id, item.name)} to={`/users/${item.name}`}>
+            <User
+              name={item.name}
+              id={item.id}
+            />
+          </Link>)}
+      </div>
+    </Fragment>
   )
 }
 export default Users;

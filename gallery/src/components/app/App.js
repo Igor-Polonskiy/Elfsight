@@ -7,54 +7,54 @@ import {
 } from "react-router-dom";
 import Gallery from '../gallery/gallery';
 import OpenedAlbum from '../openedAlbum/openedAlbum'
+import Preloader from '../preloader/preloader'
 
 
 
 function App() {
   const [data, setData] = useState([]);
   const [isLoad, setLoad] = useState(false);
-  const [userid, setUserid] = useState(null);
   const [gallery, setGallery] = useState(null);
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState();
   const [shownAlbum, setShownAlbum] = useState(null);
-  const [filtrePhotos, setFiltredPhoto] = useState([]);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(res => setData(res))
+
+    fetch('https://jsonplaceholder.typicode.com/photos')
+      .then(res => res.json())
+      .then(res => setPhotos(res))
       .then(() => setLoad(true))
+
   }, []);
 
-  function getPhotos(photos) {
-    setPhotos(photos)
-    setFiltredPhoto(photos.filter(photo => photo.albumId === shownAlbum))
-  }
   function getShownAlbum(albumId) {
     setShownAlbum(albumId)
   }
 
-  const handleclick = (id) => {
-    setUserid(id);
-    setGallery(<Gallery id={id} getPhotos={getPhotos} getShownAlbum={getShownAlbum}/>)
+  const handleclick = (id,name) => {
+    setGallery(<Gallery id={id} name={name} getShownAlbum={getShownAlbum} photos={photos}/>)
   }
 
-
-  return (
+   return (
     <Router>
       <Switch>
         <Route path='/' exact>
           <div className="App">
             {isLoad ?
               <Users users={data} getid={handleclick} /> :
-              <div>notYet</div>}
+              <Preloader/>}
           </div>
         </Route>
-        <Route path='/user' >
+        <Route path='/users' >
           {gallery}
         </Route>
         <Route path='/album' >
-          <OpenedAlbum photos={filtrePhotos} />
+          {isLoad ?
+            <OpenedAlbum photos={photos.filter(photo => photo.albumId === shownAlbum)} /> :
+            <Preloader/>}
         </Route>
       </Switch>
     </Router>
