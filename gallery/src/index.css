@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Cario';
-    src: local('Cario'), url('./Cairo-Regular.ttf') format('ttf');
+    src:  url('./Cairo-Regular.ttf') format('ttf');
     
   }
 
