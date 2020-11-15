@@ -7,7 +7,9 @@ function Album(props) {
         <Link to='/album' className='album_link' onClick={props.onClick}>
             <div className='album'>
                 <div className='album_img'>
-                    <img src={props.background} alt={props.altImg} />
+                    <div className='album_img-wrapper'>
+                        <img src={props.background} alt={props.altImg} />
+                    </div>
                     <h3>{props.title}</h3>
                 </div>
                 <div>{props.photos} фотографий в альбоме</div>

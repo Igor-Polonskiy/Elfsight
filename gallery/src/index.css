@@ -1,4 +1,13 @@
+
+
+@font-face {
+    font-family: 'Cario';
+    src: local('Cario'), url('./Cairo-Regular.ttf') format('ttf');
+    
+  }
+
 body {
+    font-family: 'Cairo', sans-serif;
     background-color: rgb(235, 232, 240);
     margin: 0;
     padding: 0;

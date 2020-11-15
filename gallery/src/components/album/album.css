@@ -36,3 +36,10 @@
     box-sizing: border-box;
     margin: 20px;
 }
+.album_img-wrapper{
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    background-position: 0 0;
+    animation: background 2s infinite alternate;
+}

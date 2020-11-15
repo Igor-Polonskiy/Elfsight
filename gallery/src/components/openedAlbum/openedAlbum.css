@@ -1,7 +1,15 @@
 .photo_wraper {
     margin: 10px;
     cursor: pointer;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    background-position: 0 0;
+    animation: background 2s infinite alternate;
+    
 }
+
+
 
 .photos_container {
     position: relative;
@@ -25,6 +33,18 @@
 .popup_photo {
     position: relative;
     margin: 20px;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    background-position: 0 0;
+    animation: background 2s infinite alternate;
+    
+}
+
+@keyframes background {
+    100% {
+        background-position: 200px 0px;
+      }
 }
 
 .close_popup {
