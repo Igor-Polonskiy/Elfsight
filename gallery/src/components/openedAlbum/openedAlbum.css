@@ -3,7 +3,7 @@
     cursor: pointer;
     width: 150px;
     height: 150px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
     background-position: 0 0;
     animation: background 2s infinite alternate;
     
