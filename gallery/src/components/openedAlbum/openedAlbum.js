@@ -38,12 +38,14 @@ function OpenedAlbum(props) {
         }
             {isPpopup ?
                 <div className='popup '>
-                    <div className='prev' onClick={prevPhoto}> {'< prev'}</div>
+                    
                     <div className='popup_photo'>
+                    <div className='prev' onClick={prevPhoto}> {'< prev'}</div>
                         <img src={photos[currentPhoto].url} alt={photos[currentPhoto].title} />
                         <div className='close_popup' onClick={closePopup}>X</div>
+                        <div className='next' onClick={nextPhoto}>{'next > '}</div>
                     </div>
-                    <div className='next' onClick={nextPhoto}>{'next > '}</div>
+                   
                 </div> :
                 null
             }
